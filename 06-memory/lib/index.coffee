@@ -10,7 +10,6 @@ exports.countryIpCounter = (countryCode, cb) ->
     while (data.indexOf '\n') != -1
       line = data.substr 0, data.indexOf '\n'
       data = data.replace line + '\n', ''
-      # data = data.slice 0, data.indexOf '\n'
       line = line.split '\t'
       # # GEO_FIELD_MIN, GEO_FIELD_MAX, GEO_FIELD_COUNTRY
       # # line[0],       line[1],       line[3]
