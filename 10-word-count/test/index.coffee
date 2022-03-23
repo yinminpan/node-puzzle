@@ -22,21 +22,36 @@ helper = (input, expected, done) ->
 
 describe '10-word-count', ->
 
-  it 'should count a single word', (done) ->
+  it 'should count a single word, characters and bytes', (done) ->
     input = 'test'
-    expected = words: 1, lines: 1
+    expected = words: 1, lines: 1, characters: 4, bytes: 4
     helper input, expected, done
 
-  it 'should count words in a phrase', (done) ->
+  it 'should count words in a phrase, characters and bytes', (done) ->
     input = 'this is a basic test'
-    expected = words: 5, lines: 1
+    expected = words: 5, lines: 1, characters: 20, bytes: 20
     helper input, expected, done
 
-  it 'should count quoted characters as a single word', (done) ->
+  it 'should count quoted characters as a single word, characters and bytes', (done) ->
     input = '"this is one word!"'
-    expected = words: 1, lines: 1
+    expected = words: 1, lines: 1, characters: 19, bytes: 19
     helper input, expected, done
 
   # !!!!!
   # Make the above tests pass and add more tests!
   # !!!!!
+
+  it 'should count a phrase, characters and bytes', (done) ->
+    input = 'The quick brown fox jumps over the lazy dog '
+    expected = words: 9, lines: 1, characters: 44, bytes: 44
+    helper input, expected, done
+
+  it 'should count quoted characters as a single word, lines, characters and bytes', (done) ->
+    input = 'The\n"Quick Brown Fox"\njumps over the lazy dog '
+    expected = words: 7, lines: 3, characters: 46, bytes: 46
+    helper input, expected, done
+
+  it 'should count camel cased words, lines, characters and bytes', (done) ->
+    input = 'TheQuick\nBrownFox\njumps\nOverTheLazy\ndog '
+    expected = words: 9, lines: 5, characters: 40, bytes: 40
+    helper input, expected, done
